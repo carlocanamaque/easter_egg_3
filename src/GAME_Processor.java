@@ -23,6 +23,7 @@ public class GAME_Processor extends JPanel implements Runnable {
 
 	final int FRAME_RATE_PER_SEC = 4;
 
+	GAME_Input input = new GAME_Input();
 	// TO-DO: code here...
 
 	Thread thread;
@@ -32,9 +33,7 @@ public class GAME_Processor extends JPanel implements Runnable {
 		this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
 		this.setBackground(Color.BLUE);
 		this.setDoubleBuffered(true);
-
-		// TO-DO: code here...
-
+		this.addKeyListener(input);
 		this.setFocusable(true);
 	}
 	void startThread() {
