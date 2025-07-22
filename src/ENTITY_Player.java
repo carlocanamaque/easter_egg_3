@@ -61,6 +61,6 @@ public class ENTITY_Player extends PARENT_Entity {
 		// 	processor.TILE_SIZE, ((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE), processor);
 		// }
 
-		g2.drawImage(sprite, x, y, processor.TILE_SIZE, processor.TILE_SIZE, processor);
+		g2.drawImage(gif, x, y, processor.TILE_SIZE, processor.TILE_SIZE, processor);
 	}
 }
