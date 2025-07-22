@@ -31,12 +31,6 @@ public class ENTITY_Player extends PARENT_Entity {
 	}
 	void update() {
 
-		if(input.pPressed) {
-			g2.drawImage(bullet, x,
-			(y-((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE)),
-			processor.TILE_SIZE, processor.TILE_SIZE, processor);
-		}
-
 		int nextX = x;
 		int nextY = y;
 
@@ -58,6 +52,11 @@ public class ENTITY_Player extends PARENT_Entity {
 	}
 	void draw(Graphics2D g2) {
 
-		g2.drawImage(gif, x, y, processor.TILE_SIZE, processor.TILE_SIZE, processor);
+		if(input.pPressed) {
+			g2.drawImage(bullet, x, (y-((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE)),
+			processor.TILE_SIZE, ((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE), processor);
+		}
+
+		g2.drawImage(sprite, x, y, processor.TILE_SIZE, processor.TILE_SIZE, processor);
 	}
 }
