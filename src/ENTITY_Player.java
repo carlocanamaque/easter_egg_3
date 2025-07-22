@@ -8,15 +8,20 @@ import java.awt.Toolkit;
 
 public class ENTITY_Player extends PARENT_Entity {
 
+	final int PROJECTILE_LIMIT;
+
 	GAME_Processor processor;
 	GAME_Input input;
 
-	// int bulletX, bulletY;
+	PARENT_Projectile[] projectiles;
+	int projectileCount;
 
 	public ENTITY_Player(GAME_Processor processor, GAME_Input input) {
 
 		this.processor = processor;
 		this.input = input;
+
+		PROJECTILE_LIMIT  = (processor.MAX_SCREEN_COL / 2);
 
 		setDefaultValues();
 	}
@@ -24,17 +29,27 @@ public class ENTITY_Player extends PARENT_Entity {
 
 		x = 0;
 		y = 0;
-
 		speed = processor.TILE_SIZE;
-
 		gif = Toolkit.getDefaultToolkit().createImage("res/player.gif");
-		// bullet = Toolkit.getDefaultToolkit().createImage("res/player_bullet.gif");
 
+		projectiles = new PARENT_Projectile[PROJECTILE_LIMIT];
+		projectileCount = 0;
+	}
+	private void useProjectile() {
+
+		projectiles[projectileCount] = new PARENT_Projectile();
+		projectiles[projectileCount].x = x;
+		projectiles[projectileCount].y = (y - ((processor.MAX_SCREEN_ROW - 1) * processor.TILE_SIZE));
+		projectiles[projectileCount].gif = Toolkit.getDefaultToolkit().createImage("res/player_bullet.gif");
+
+		projectileCount++;
 	}
 	void update() {
 
-		// bulletX = x;
-		// bulletY = y;
+		if(input.pPressed) {
+			useProjectile();
+		}
+
 		int nextX = x;
 		int nextY = y;
 
@@ -56,10 +71,11 @@ public class ENTITY_Player extends PARENT_Entity {
 	}
 	void draw(Graphics2D g2) {
 
-		// if(input.pPressed) {
-		// 	g2.drawImage(bullet, bulletX, (bulletY-((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE)),
-		// 	processor.TILE_SIZE, ((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE), processor);
-		// }
+		for(int i = 0; i < (projectileCount - 1); i++) {
+			g2.drawImage(projectiles[i].gif, projectiles[i].x, projectiles[i].y,
+			processor.TILE_SIZE, ((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE),
+			processor);
+		}
 
 		g2.drawImage(gif, x, y, processor.TILE_SIZE, processor.TILE_SIZE, processor);
 	}
