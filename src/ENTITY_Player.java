@@ -15,6 +15,7 @@ public class ENTITY_Player extends PARENT_Entity {
 
 	PARENT_Projectile[] projectiles;
 	int projectileCount;
+	boolean projectileReload;
 
 	public ENTITY_Player(GAME_Processor processor, GAME_Input input) {
 
@@ -41,9 +42,26 @@ public class ENTITY_Player extends PARENT_Entity {
 		projectiles[projectileCount].x = x;
 		projectiles[projectileCount].y = (y - ((processor.MAX_SCREEN_ROW - 1) * processor.TILE_SIZE));
 		projectiles[projectileCount].gif = Toolkit.getDefaultToolkit().createImage("res/player_bullet.gif");
-		
-		System.out.println(projectileCount);
+
+		System.out.println(projectileCount);		// DEBUG: print code.
+
 		projectileCount++;
+
+		if(projectileCount == PROJECTILE_LIMIT) {
+
+			projectileReload = true;
+			System.out.println("Reloading...");	// DEBUG: print code.
+
+			new javax.swing.Timer(2000, e -> {
+				input.pPressed = false;
+				projectiles = new PARENT_Projectile[PROJECTILE_LIMIT];
+				projectileCount = 0;
+				System.out.println("Loaded.");	// DEBUG: print code.
+			((javax.swing.Timer) e.getSource()).stop();
+			}).start();
+
+			projectileReload = false;
+		}
 	}
 	void update() {
 
@@ -60,7 +78,7 @@ public class ENTITY_Player extends PARENT_Entity {
 			nextX += speed;
 		}
 
-		if(input.pPressed && (nextX != x) && (projectileCount < PROJECTILE_LIMIT)) {
+		if(input.pPressed && (projectileCount < PROJECTILE_LIMIT)) {
 			useProjectile();
 		}
 
@@ -73,9 +91,11 @@ public class ENTITY_Player extends PARENT_Entity {
 	void draw(Graphics2D g2) {
 
 		for(int i = 0; i < projectileCount; i++) {
-			g2.drawImage(projectiles[i].gif, projectiles[i].x, projectiles[i].y,
-			processor.TILE_SIZE, ((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE),
-			processor);
+			if(!projectileReload) {
+				g2.drawImage(projectiles[i].gif, projectiles[i].x, projectiles[i].y,
+				processor.TILE_SIZE, ((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE),
+				processor);
+			}
 		}
 
 		g2.drawImage(gif, x, y, processor.TILE_SIZE, processor.TILE_SIZE, processor);
