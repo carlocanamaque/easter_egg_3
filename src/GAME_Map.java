@@ -14,8 +14,15 @@ public class GAME_Map {
 
 		this.processor = processor;
 	}
-	void draw(Graphics2D g2) { 
+	private void designateObstacles() {
 
 		// TO-DO: code here...
+	}
+	void draw(Graphics2D g2) { 
+
+		for(int i = 0; i < obstacles.length; i++) {
+			g2.drawImage(obstacles[i].gif, obstacles[i].x, obstacles[i].y,
+			obstacles[i].width, obstacles[i].height, processor);
+		}
 	}
 }
