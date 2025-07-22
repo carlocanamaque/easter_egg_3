@@ -25,9 +25,17 @@ public class ENTITY_Player extends PARENT_Entity {
 
 		speed = processor.TILE_SIZE;
 
-		gif = Toolkit.getDefaultToolkit().createImage("res/player.gif");
+		sprite = Toolkit.getDefaultToolkit().createImage("res/player.gif");
+		bullet = Toolkit.getDefaultToolkit().createImage("res/player_bullet.gif");
+
 	}
 	void update() {
+
+		if(input.pPressed) {
+			g2.drawImage(bullet, x,
+			(y-((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE)),
+			processor.TILE_SIZE, processor.TILE_SIZE, processor);
+		}
 
 		int nextX = x;
 		int nextY = y;
