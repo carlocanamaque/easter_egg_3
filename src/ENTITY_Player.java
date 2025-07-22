@@ -2,6 +2,8 @@ package src;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 
 public class ENTITY_Player extends PARENT_Entity {
@@ -20,7 +22,10 @@ public class ENTITY_Player extends PARENT_Entity {
 
 		x = 0;
 		y = 0;
+
 		speed = processor.TILE_SIZE;
+
+		gif = Toolkit.getDefaultToolkit().createImage("res/ENTITY_Player_gif.gif");
 	}
 	void update() {
 
@@ -45,7 +50,6 @@ public class ENTITY_Player extends PARENT_Entity {
 	}
 	void draw(Graphics2D g2) {
 
-		g2.setColor(Color.WHITE);
-		g2.drawRect(x, y, processor.TILE_SIZE, processor.TILE_SIZE);
+		g2.drawImage(gif, x, y, processor.TILE_SIZE, processor.TILE_SIZE, processor);
 	}
 }
