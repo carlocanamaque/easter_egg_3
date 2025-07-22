@@ -25,7 +25,7 @@ public class ENTITY_Player extends PARENT_Entity {
 
 		speed = processor.TILE_SIZE;
 
-		gif = Toolkit.getDefaultToolkit().createImage("res/ENTITY_Player_gif.gif");
+		gif = Toolkit.getDefaultToolkit().createImage("res/player.gif");
 	}
 	void update() {
 
