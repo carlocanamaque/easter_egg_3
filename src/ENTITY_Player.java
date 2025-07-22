@@ -11,7 +11,7 @@ public class ENTITY_Player extends PARENT_Entity {
 	GAME_Processor processor;
 	GAME_Input input;
 
-	int bulletX, bulletY;
+	// int bulletX, bulletY;
 
 	public ENTITY_Player(GAME_Processor processor, GAME_Input input) {
 
@@ -27,14 +27,14 @@ public class ENTITY_Player extends PARENT_Entity {
 
 		speed = processor.TILE_SIZE;
 
-		sprite = Toolkit.getDefaultToolkit().createImage("res/player.gif");
-		bullet = Toolkit.getDefaultToolkit().createImage("res/player_bullet.gif");
+		gif = Toolkit.getDefaultToolkit().createImage("res/player.gif");
+		// bullet = Toolkit.getDefaultToolkit().createImage("res/player_bullet.gif");
 
 	}
 	void update() {
 
-		bulletX = x;
-		bulletY = y;
+		// bulletX = x;
+		// bulletY = y;
 		int nextX = x;
 		int nextY = y;
 
@@ -56,10 +56,10 @@ public class ENTITY_Player extends PARENT_Entity {
 	}
 	void draw(Graphics2D g2) {
 
-		if(input.pPressed) {
-			g2.drawImage(bullet, bulletX, (bulletY-((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE)),
-			processor.TILE_SIZE, ((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE), processor);
-		}
+		// if(input.pPressed) {
+		// 	g2.drawImage(bullet, bulletX, (bulletY-((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE)),
+		// 	processor.TILE_SIZE, ((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE), processor);
+		// }
 
 		g2.drawImage(sprite, x, y, processor.TILE_SIZE, processor.TILE_SIZE, processor);
 	}
