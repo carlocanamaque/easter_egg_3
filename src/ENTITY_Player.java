@@ -11,6 +11,8 @@ public class ENTITY_Player extends PARENT_Entity {
 	GAME_Processor processor;
 	GAME_Input input;
 
+	int bulletX, bulletY;
+
 	public ENTITY_Player(GAME_Processor processor, GAME_Input input) {
 
 		this.processor = processor;
@@ -31,6 +33,8 @@ public class ENTITY_Player extends PARENT_Entity {
 	}
 	void update() {
 
+		bulletX = x;
+		bulletY = y;
 		int nextX = x;
 		int nextY = y;
 
@@ -53,7 +57,7 @@ public class ENTITY_Player extends PARENT_Entity {
 	void draw(Graphics2D g2) {
 
 		if(input.pPressed) {
-			g2.drawImage(bullet, x, (y-((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE)),
+			g2.drawImage(bullet, bulletX, (bulletY-((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE)),
 			processor.TILE_SIZE, ((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE), processor);
 		}
 
