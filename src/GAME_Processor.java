@@ -21,7 +21,7 @@ public class GAME_Processor extends JPanel implements Runnable {
 	final int SCREEN_WIDTH = (TILE_SIZE * MAX_SCREEN_COL);
 	final int SCREEN_HEIGHT = (TILE_SIZE * MAX_SCREEN_ROW);
 
-	final int FRAME_RATE_PER_SEC = 4;
+	final int FRAME_RATE_PER_SEC = 12;
 
 	GAME_Input input = new GAME_Input();
 	ENTITY_Player player = new ENTITY_Player(this, input);
