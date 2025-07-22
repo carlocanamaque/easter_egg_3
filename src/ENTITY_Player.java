@@ -46,7 +46,9 @@ public class ENTITY_Player extends PARENT_Entity {
 	}
 	void update() {
 
-		if(input.pPressed) {
+		// SOL'N-TO-BUG: utilize a timer to freeze pPressed reading 
+		//               so projectiles wouldn't stack with fast FPS.
+		if(input.pPressed && projectileCount < PROJECTILE_LIMIT) {
 			useProjectile();
 		}
 
