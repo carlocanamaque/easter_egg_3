@@ -8,7 +8,6 @@ import java.awt.Toolkit;
 
 public class ENTITY_Player extends PARENT_Entity {
 
-	final int PLAY_AREA_HEIGHT;	// NOTE: measured based from bottom window.
 	final int PROJECTILE_LIMIT;
 
 	GAME_Processor processor;
@@ -23,7 +22,6 @@ public class ENTITY_Player extends PARENT_Entity {
 		this.processor = processor;
 		this.input = input;
 
-		PLAY_AREA_HEIGHT = (processor.TILE_SIZE * (processor.MAX_SCREEN_ROW / 2));
 		PROJECTILE_LIMIT  = (processor.MAX_SCREEN_COL / 2);
 
 		setDefaultValues();
@@ -85,7 +83,7 @@ public class ENTITY_Player extends PARENT_Entity {
 		}
 
 		if (nextX >= 0 && nextX <= (processor.SCREEN_WIDTH - processor.TILE_SIZE) &&
-		nextY >= PLAY_AREA_HEIGHT && nextY <= (processor.SCREEN_HEIGHT - processor.TILE_SIZE)) {
+		nextY >= processor.PLAY_AREA_HEIGHT && nextY <= (processor.SCREEN_HEIGHT - processor.TILE_SIZE)) {
 			x = nextX;
 			y = nextY;
 		}
@@ -101,7 +99,7 @@ public class ENTITY_Player extends PARENT_Entity {
 		}
 
 		g2.setColor(Color.WHITE);
-		g2.drawLine(0, PLAY_AREA_HEIGHT, processor.SCREEN_WIDTH, PLAY_AREA_HEIGHT);
+		g2.drawLine(0, processor.PLAY_AREA_HEIGHT, processor.SCREEN_WIDTH, processor.PLAY_AREA_HEIGHT);
 
 		g2.drawImage(gif, x, y, processor.TILE_SIZE, processor.TILE_SIZE, processor);
 	}
