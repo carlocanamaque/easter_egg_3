@@ -16,7 +16,7 @@ public class GAME_Map {
 	}
 	private void setDefaultValues() {
 
-		// TO-DO: code here...
+		generateObstacles();
 	}
 	private void generateObstacles() {
 
@@ -33,17 +33,17 @@ public class GAME_Map {
 			double randAnchor = (Math.random() * 8);
 			int randAnchorInt = ((int) randAnchor);
 			if(obstacles[i].isVertical) {
+				obstacles[i].gif = Toolkit.getDefaultToolkit().createImage("res/obstacle_vertical.gif");
 				obstacles[i].x = (randAnchorInt * processor.TILE_SIZE);
 				obstacles[i].y = processor.PLAY_AREA_HEIGHT;
 
 			} else {
+				obstacles[i].gif = Toolkit.getDefaultToolkit().createImage("res/obstacle_horizontal.gif");
 				obstacles[i].x = 0;
 				obstacles[i].y = (processor.PLAY_AREA_HEIGHT +
 				(randAnchorInt * processor.TILE_SIZE));
 			}
 		}
-
-		// TO-DO: code here...
 	}
 	void draw(Graphics2D g2) { 
 
