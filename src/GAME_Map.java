@@ -14,7 +14,34 @@ public class GAME_Map {
 
 		this.processor = processor;
 	}
-	private void designateObstacles() {
+	private void setDefaultValues() {
+
+		// TO-DO: code here...
+	}
+	private void generateObstacles() {
+
+		for(int i = 0; i < obstacles.length; i++) {
+
+			double randAlignment = (Math.random() * 2);
+			int randInt = ((int) randAlignment);
+			if(randInt == 0) {
+				obstacles[i].isVertical = true;
+			} else {
+				obstacles[i].isVertical = false;
+			}
+
+			double randAnchor = (Math.random() * 8);
+			int randAnchorInt = ((int) randAnchor);
+			if(obstacles[i].isVertical) {
+				obstacles[i].x = (randAnchorInt * processor.TILE_SIZE);
+				obstacles[i].y = processor.PLAY_AREA_HEIGHT;
+
+			} else {
+				obstacles[i].x = 0;
+				obstacles[i].y = (processor.PLAY_AREA_HEIGHT +
+				(randAnchorInt * processor.TILE_SIZE));
+			}
+		}
 
 		// TO-DO: code here...
 	}
