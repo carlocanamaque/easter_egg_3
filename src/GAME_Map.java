@@ -13,8 +13,14 @@ public class GAME_Map {
 	public GAME_Map(GAME_Processor processor) {
 
 		this.processor = processor;
+
+		setDefaultValues();
 	}
 	private void setDefaultValues() {
+
+		for(int i = 0; i < obstacles.length; i++) {
+			obstacles[i] = new PARENT_Obstacle();
+		}
 
 		generateObstacles();
 	}
@@ -23,8 +29,8 @@ public class GAME_Map {
 		for(int i = 0; i < obstacles.length; i++) {
 
 			double randAlignment = (Math.random() * 2);
-			int randInt = ((int) randAlignment);
-			if(randInt == 0) {
+			int randAlignmentInt = ((int) randAlignment);
+			if(randAlignmentInt == 0) {
 				obstacles[i].isVertical = true;
 			} else {
 				obstacles[i].isVertical = false;
@@ -36,12 +42,16 @@ public class GAME_Map {
 				obstacles[i].gif = Toolkit.getDefaultToolkit().createImage("res/obstacle_vertical.gif");
 				obstacles[i].x = (randAnchorInt * processor.TILE_SIZE);
 				obstacles[i].y = processor.PLAY_AREA_HEIGHT;
+				obstacles[i].width = processor.TILE_SIZE;
+				obstacles[i].height = processor.PLAY_AREA_HEIGHT;
 
-			} else {
+		} else {
 				obstacles[i].gif = Toolkit.getDefaultToolkit().createImage("res/obstacle_horizontal.gif");
 				obstacles[i].x = 0;
-				obstacles[i].y = (processor.PLAY_AREA_HEIGHT +
-				(randAnchorInt * processor.TILE_SIZE));
+				obstacles[i].y = (processor.PLAY_AREA_HEIGHT + (randAnchorInt * processor.TILE_SIZE));
+				obstacles[i].width = processor.SCREEN_WIDTH;
+				obstacles[i].height = processor.TILE_SIZE;
+
 			}
 		}
 	}

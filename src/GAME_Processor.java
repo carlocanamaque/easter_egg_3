@@ -27,7 +27,7 @@ public class GAME_Processor extends JPanel implements Runnable {
 
 	GAME_Input input = new GAME_Input();
 	ENTITY_Player player = new ENTITY_Player(this, input);
-	// TO-DO: code here...
+	GAME_Map map = new GAME_Map(this);
 
 	Thread thread;
 	
@@ -55,7 +55,7 @@ public class GAME_Processor extends JPanel implements Runnable {
 		Graphics2D g2 = (Graphics2D)g;
 
 		player.draw(g2);
-		// TO-DO: code here...
+		map.draw(g2);
 
 		String os = System.getProperty("os.name").toLowerCase();
 		if (os.contains("linux")) {
