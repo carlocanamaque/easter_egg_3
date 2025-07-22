@@ -41,16 +41,11 @@ public class ENTITY_Player extends PARENT_Entity {
 		projectiles[projectileCount].x = x;
 		projectiles[projectileCount].y = (y - ((processor.MAX_SCREEN_ROW - 1) * processor.TILE_SIZE));
 		projectiles[projectileCount].gif = Toolkit.getDefaultToolkit().createImage("res/player_bullet.gif");
-
+		
+		System.out.println(projectileCount);
 		projectileCount++;
 	}
 	void update() {
-
-		// SOL'N-TO-BUG: utilize a timer to freeze pPressed reading 
-		//               so projectiles wouldn't stack with fast FPS.
-		if(input.pPressed && projectileCount < PROJECTILE_LIMIT) {
-			useProjectile();
-		}
 
 		int nextX = x;
 		int nextY = y;
@@ -65,6 +60,10 @@ public class ENTITY_Player extends PARENT_Entity {
 			nextX += speed;
 		}
 
+		if(input.pPressed && (nextX != x) && (projectileCount < PROJECTILE_LIMIT)) {
+			useProjectile();
+		}
+
 		if (nextX >= 0 && nextX <= (processor.SCREEN_WIDTH - processor.TILE_SIZE) &&
 		    nextY >= 0 && nextY <= (processor.SCREEN_HEIGHT - processor.TILE_SIZE)) {
 			x = nextX;
@@ -73,7 +72,7 @@ public class ENTITY_Player extends PARENT_Entity {
 	}
 	void draw(Graphics2D g2) {
 
-		for(int i = 0; i < (projectileCount - 1); i++) {
+		for(int i = 0; i < projectileCount; i++) {
 			g2.drawImage(projectiles[i].gif, projectiles[i].x, projectiles[i].y,
 			processor.TILE_SIZE, ((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE),
 			processor);
