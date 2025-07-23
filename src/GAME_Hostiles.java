@@ -79,10 +79,15 @@ public class GAME_Hostiles {
 	}
 	void update() {
 
-		// TO-DO: code here...
+		for(int i = 0; i < hostiles.length; i++) {
+			hostiles[i].y += hostiles[i].speed;
+		}
 	}
 	void repaint(Graphics2D g2) {
 
-		// TO-DO: code here...
+		for(int i = 0; i < hostiles.length; i++) {
+			g2.drawImage(hostiles[i].gif, hostiles[i].x, hostiles[i].y,
+			processor.TILE_SIZE, processor.TILE_SIZE, processor);
+		}
 	}
 }
