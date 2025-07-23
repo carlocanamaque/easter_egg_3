@@ -23,6 +23,7 @@ public class GAME_Hostiles {
 
 		for(int i = 0; i < hostiles.length; i++) {
 			hostiles[i] = new ENTITY_Hostile();
+			hostiles[i].isEliminated = true;
 		}
 
 		generateHostiles();
@@ -77,19 +78,25 @@ public class GAME_Hostiles {
 			} else {
 				hostiles[i].hasProjectile = false;
 			}
+
+			hostiles[i].isEliminated = false;
 		}
 	}
 	void update() {
 
 		for(int i = 0; i < hostiles.length; i++) {
-			hostiles[i].y += hostiles[i].speed;
+			if(!hostiles[i].isEliminated) {
+				hostiles[i].y += hostiles[i].speed;
+			}
 		}
 	}
 	void draw(Graphics2D g2) {
 
 		for(int i = 0; i < hostiles.length; i++) {
-			g2.drawImage(hostiles[i].gif, hostiles[i].x, hostiles[i].y,
-			processor.TILE_SIZE, processor.TILE_SIZE, processor);
+			if(!hostiles[i].isEliminated) {
+				g2.drawImage(hostiles[i].gif, hostiles[i].x, hostiles[i].y,
+				processor.TILE_SIZE, processor.TILE_SIZE, processor);
+			}
 		}
 	}
 }
