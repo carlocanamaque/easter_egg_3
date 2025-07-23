@@ -24,7 +24,7 @@ public class GAME_Map {
 
 		generateObstacles();
 	}
-	private void generateObstacles() {
+	void generateObstacles() {
 
 		for(int i = 0; i < obstacles.length; i++) {
 

@@ -29,9 +29,11 @@ public class GAME_Processor extends JPanel {
 	private ENTITY_Player player = new ENTITY_Player(this, input);
 	private GAME_Map map = new GAME_Map(this);
 
-	private Runnable gameRunnable;
+	private Runnable mainRunnable;
+	private Runnable obstacleRunnable;
 
 	private Thread mainThread;
+	private Thread obstacleThread;
 	
 	public GAME_Processor() {
 
@@ -41,7 +43,7 @@ public class GAME_Processor extends JPanel {
 		this.addKeyListener(input);
 		this.setFocusable(true);
 
-		gameRunnable = () -> {
+		mainRunnable = () -> {
        	    		double drawInterval = 1000000000/FRAME_RATE_PER_SEC;
 			double delta = 0;
 			long lastTime = System.nanoTime();
@@ -62,11 +64,34 @@ public class GAME_Processor extends JPanel {
 				}
 			}
         	};
+		obstacleRunnable = () -> {
+			double drawInterval = 1000000000/FRAME_RATE_PER_SEC;
+			double delta = 0;
+			long lastTime = System.nanoTime();
+			long currentTime;
+
+			while (mainThread != null) {
+
+				currentTime = System.nanoTime();
+
+				delta += (currentTime - lastTime) / drawInterval;
+				lastTime = currentTime;
+
+				if (delta >= 30) {
+
+					map.generateObstacles();
+					delta -= 30;
+				}
+			}
+		};
 	}
 	void startAllThreads() {
 
-		mainThread = new Thread(gameRunnable);
+		mainThread = new Thread(mainRunnable);
+		obstacleThread = new Thread(obstacleRunnable);
+
 		mainThread.start();
+		obstacleThread.start();
 	}
 	private void update() {
 
