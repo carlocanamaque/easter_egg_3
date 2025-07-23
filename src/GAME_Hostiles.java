@@ -83,7 +83,7 @@ public class GAME_Hostiles {
 			hostiles[i].y += hostiles[i].speed;
 		}
 	}
-	void repaint(Graphics2D g2) {
+	void draw(Graphics2D g2) {
 
 		for(int i = 0; i < hostiles.length; i++) {
 			g2.drawImage(hostiles[i].gif, hostiles[i].x, hostiles[i].y,
