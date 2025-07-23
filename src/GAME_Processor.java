@@ -32,9 +32,11 @@ public class GAME_Processor extends JPanel {
 
 	private Runnable mainRunnable;
 	private Runnable obstacleRunnable;
+	private Runnable hostileRunnable;
 
 	private Thread mainThread;
 	private Thread obstacleThread;
+	private Thread hostileThread;
 	
 	public GAME_Processor() {
 
@@ -85,14 +87,37 @@ public class GAME_Processor extends JPanel {
 				}
 			}
 		};
+		hostileRunnable = () -> {
+			double drawInterval = 1000000000/FRAME_RATE_PER_SEC;
+			double delta = 0;
+			long lastTime = System.nanoTime();
+			long currentTime;
+
+			while (mainThread != null) {
+
+				currentTime = System.nanoTime();
+
+				delta += (currentTime - lastTime) / drawInterval;
+				lastTime = currentTime;
+
+				if (delta >= 30) {
+
+					hostiles.generateHostiles();
+					delta -= 15;
+				}
+			}
+		};
+
 	}
 	void startAllThreads() {
 
 		mainThread = new Thread(mainRunnable);
 		obstacleThread = new Thread(obstacleRunnable);
+		hostileThread = new Thread(hostileRunnable);
 
 		mainThread.start();
 		obstacleThread.start();
+		hostileThread.start();
 	}
 	private void update() {
 
