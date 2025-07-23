@@ -30,10 +30,6 @@ public class GAME_Hostiles {
 				hostiles[i][j].isEliminated = true;
 			}
 		}
-
-		// for(int i = 0; i < HOSTILE_BATCH_COUNT; i++) {
-		// 	generateHostileBatch(i);
-		// }
 	}
 	private boolean isSpawnUsed(int spawnpoint) {
 		
