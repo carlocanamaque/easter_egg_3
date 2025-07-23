@@ -28,6 +28,7 @@ public class GAME_Processor extends JPanel {
 	private GAME_Input input = new GAME_Input();
 	private ENTITY_Player player = new ENTITY_Player(this, input);
 	private GAME_Map map = new GAME_Map(this);
+	private GAME_Hostiles hostiles = new GAME_Hostiles(this);
 
 	private Runnable mainRunnable;
 	private Runnable obstacleRunnable;
@@ -96,6 +97,7 @@ public class GAME_Processor extends JPanel {
 	private void update() {
 
 		player.update();
+		hostiles.update();
 	}
 	@Override
 	public void paintComponent(Graphics g) {
@@ -105,6 +107,7 @@ public class GAME_Processor extends JPanel {
 
 		map.draw(g2);
 		player.draw(g2);
+		hostiles.draw(g2);
 
 		String os = System.getProperty("os.name").toLowerCase();
 		if (os.contains("linux")) {
