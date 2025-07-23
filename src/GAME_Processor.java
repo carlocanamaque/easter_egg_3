@@ -103,10 +103,10 @@ public class GAME_Processor extends JPanel {
 				delta += (currentTime - lastTime) / drawInterval;
 				lastTime = currentTime;
 
-				if (delta >= 30) {
+				if (delta >= 180) {
 
 					hostiles.generateHostileBatch(x);
-					delta -= 15;
+					delta -= 180;
 
 					x++;
 					if(x == 5) {
