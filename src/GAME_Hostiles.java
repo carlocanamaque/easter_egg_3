@@ -4,14 +4,15 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-// TO-DO: try to implement a 2D array to allow multiple hostile generation.
-
 
 public class GAME_Hostiles {
 
+	private final int HOSTILE_BATCH_COUNT = 10;
+	private final int HOSTILE_COUNT_PER_BATCH = 5;
+
 	GAME_Processor processor;
-	ENTITY_Hostile hostiles[] = new ENTITY_Hostile[5];
-	int[] spawnpoints = new int[8];
+	ENTITY_Hostile hostiles[][] = new ENTITY_Hostile[HOSTILE_BATCH_COUNT][HOSTILE_COUNT_PER_BATCH];
+	int[] spawnpoints;
 
 	public GAME_Hostiles(GAME_Processor processor) {
 
@@ -21,12 +22,18 @@ public class GAME_Hostiles {
 	}
 	private void setDefaultValues() {
 
-		for(int i = 0; i < hostiles.length; i++) {
-			hostiles[i] = new ENTITY_Hostile();
-			hostiles[i].isEliminated = true;
+		spawnpoints = new int[processor.MAX_SCREEN_COL];
+
+		for(int i = 0; i < HOSTILE_BATCH_COUNT; i++) {
+			for(int j = 0; j < HOSTILE_COUNT_PER_BATCH; j++) {
+				hostiles[i][j] = new ENTITY_Hostile();
+				hostiles[i][j].isEliminated = true;
+			}
 		}
 
-		generateHostiles();
+		for(int i = 0; i < HOSTILE_BATCH_COUNT; i++) {
+			generateHostiles(i);
+		}
 	}
 	private boolean isSpawnUsed(int spawnpoint) {
 		
@@ -37,65 +44,75 @@ public class GAME_Hostiles {
 		}
 		return false;
 	}
-	void generateHostiles() {
+	void generateHostiles(int row) {
 
-		for(int i = 0; i < hostiles.length; i++) {
+		for(int i = 0; i < HOSTILE_COUNT_PER_BATCH; i++) {
 
 			double randAlignment = (Math.random() * 8);
-			int randAlignmentInt = ((int) randAlignment);
+			int randAlignmentInt = (((int) randAlignment) + 1);
 
 			if(!isSpawnUsed(randAlignmentInt)) {}
 			else {
 				while(isSpawnUsed(randAlignmentInt)) {
 					randAlignment = (Math.random() * 8);
-					randAlignmentInt = ((int) randAlignment);
+					randAlignmentInt = (((int) randAlignment) + 1);
 				}
 			}
-			hostiles[i].x = (randAlignmentInt * processor.TILE_SIZE);
-			hostiles[i].y = -processor.TILE_SIZE;
-			spawnpoints[i] = randAlignmentInt;
+			hostiles[row][i].x = ((randAlignmentInt - 1) * processor.TILE_SIZE);
+			hostiles[row][i].y = -processor.TILE_SIZE;
+
+			for(int j = 0; j < spawnpoints.length; j++) {
+				if(spawnpoints[j] == 0) {
+					spawnpoints[j] = randAlignmentInt;
+				}
+			}
 
 			double randSpeed = (Math.random() * 3);
 			int randSpeedInt = (((int) randSpeed) + 2);
-			hostiles[i].speed = randSpeedInt;
+			hostiles[row][i].speed = randSpeedInt;
 			if(randSpeedInt == 2) {
-				hostiles[i].gif =
+				hostiles[row][i].gif =
 				Toolkit.getDefaultToolkit().createImage("res/hostile_slow.gif");
 			}
 			else if (randSpeedInt == 3) {
-				hostiles[i].gif =
+				hostiles[row][i].gif =
 				Toolkit.getDefaultToolkit().createImage("res/hostile_moderate.gif");
 			}
 			else if (randSpeedInt == 4) {
-				hostiles[i].gif =
+				hostiles[row][i].gif =
 				Toolkit.getDefaultToolkit().createImage("res/hostile_fast.gif");
 			}
 
 			double randProj = (Math.random() * 2);
 			int randProjInt = ((int) randProj);
 			if(randProjInt == 0) {
-				hostiles[i].hasProjectile = true;
+				hostiles[row][i].hasProjectile = true;
 			} else {
-				hostiles[i].hasProjectile = false;
+				hostiles[row][i].hasProjectile = false;
 			}
 
-			hostiles[i].isEliminated = false;
+			hostiles[row][i].isEliminated = false;
 		}
 	}
 	void update() {
 
-		for(int i = 0; i < hostiles.length; i++) {
-			if(!hostiles[i].isEliminated) {
-				hostiles[i].y += hostiles[i].speed;
+		for(int i = 0; i < HOSTILE_BATCH_COUNT; i++) {
+			for(int j = 0; j < HOSTILE_COUNT_PER_BATCH; j++) {
+				if(!hostiles[i][j].isEliminated) {
+					hostiles[i][j].y += hostiles[i][j].speed;
+				}
 			}
 		}
 	}
 	void draw(Graphics2D g2) {
 
-		for(int i = 0; i < hostiles.length; i++) {
-			if(!hostiles[i].isEliminated) {
-				g2.drawImage(hostiles[i].gif, hostiles[i].x, hostiles[i].y,
-				processor.TILE_SIZE, processor.TILE_SIZE, processor);
+		for(int i = 0; i < HOSTILE_BATCH_COUNT; i++) {
+			for(int j = 0; j < HOSTILE_COUNT_PER_BATCH; j++) {
+				if(!hostiles[i][j].isEliminated) {
+					g2.drawImage(hostiles[i][j].gif, hostiles[i][j].x,
+					hostiles[i][j].y, processor.TILE_SIZE,
+					processor.TILE_SIZE, processor);
+				}
 			}
 		}
 	}

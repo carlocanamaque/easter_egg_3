@@ -102,7 +102,7 @@ public class GAME_Processor extends JPanel {
 
 				if (delta >= 30) {
 
-					hostiles.generateHostiles();
+					// hostiles.generateHostiles();
 					delta -= 15;
 				}
 			}
