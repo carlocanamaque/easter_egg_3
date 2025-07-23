@@ -25,13 +25,13 @@ public class GAME_Processor extends JPanel {
 
 	final int FRAME_RATE_PER_SEC = 12;
 
-	GAME_Input input = new GAME_Input();
-	ENTITY_Player player = new ENTITY_Player(this, input);
-	GAME_Map map = new GAME_Map(this);
+	private GAME_Input input = new GAME_Input();
+	private ENTITY_Player player = new ENTITY_Player(this, input);
+	private GAME_Map map = new GAME_Map(this);
 
-	Runnable gameRunnable;
+	private Runnable gameRunnable;
 
-	Thread mainThread;
+	private Thread mainThread;
 	
 	public GAME_Processor() {
 
