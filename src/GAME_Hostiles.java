@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+// TO-DO: try to implement a 2D array to allow multiple hostile generation.
+
 
 public class GAME_Hostiles {
 
