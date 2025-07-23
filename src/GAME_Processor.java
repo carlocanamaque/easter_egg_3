@@ -26,9 +26,9 @@ public class GAME_Processor extends JPanel {
 	final int FRAME_RATE_PER_SEC = 12;
 
 	private GAME_Input input = new GAME_Input();
-	private ENTITY_Player player = new ENTITY_Player(this, input);
-	private GAME_Map map = new GAME_Map(this);
-	private GAME_Hostiles hostiles = new GAME_Hostiles(this);
+	ENTITY_Player player = new ENTITY_Player(this, input);
+	GAME_Map map = new GAME_Map(this);
+	GAME_Hostiles hostiles = new GAME_Hostiles(this);
 
 	private Runnable mainRunnable;
 	private Runnable obstacleRunnable;
