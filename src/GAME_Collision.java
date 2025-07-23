@@ -18,10 +18,12 @@ public class GAME_Collision {
 	private boolean checkObstacleCollision() {
 
 		// TO-DO: code here...
+		return false;
 	}
 	private boolean checkHostileCollision() {
 
 		// TO-DO: code here...
+		return false;
 	}
 	void update() {
 
