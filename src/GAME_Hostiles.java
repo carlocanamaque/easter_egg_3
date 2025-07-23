@@ -31,9 +31,9 @@ public class GAME_Hostiles {
 			}
 		}
 
-		for(int i = 0; i < HOSTILE_BATCH_COUNT; i++) {
-			generateHostiles(i);
-		}
+		// for(int i = 0; i < HOSTILE_BATCH_COUNT; i++) {
+		// 	generateHostileBatch(i);
+		// }
 	}
 	private boolean isSpawnUsed(int spawnpoint) {
 		
@@ -44,7 +44,7 @@ public class GAME_Hostiles {
 		}
 		return false;
 	}
-	void generateHostiles(int row) {
+	void generateHostileBatch(int row) {
 
 		for(int i = 0; i < HOSTILE_COUNT_PER_BATCH; i++) {
 

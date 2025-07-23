@@ -88,6 +88,9 @@ public class GAME_Processor extends JPanel {
 			}
 		};
 		hostileRunnable = () -> {
+
+			int x = 0;
+
 			double drawInterval = 1000000000/FRAME_RATE_PER_SEC;
 			double delta = 0;
 			long lastTime = System.nanoTime();
@@ -102,8 +105,13 @@ public class GAME_Processor extends JPanel {
 
 				if (delta >= 30) {
 
-					// hostiles.generateHostiles();
+					hostiles.generateHostileBatch(x);
 					delta -= 15;
+
+					x++;
+					if(x == 5) {
+						x -= 5;
+					}
 				}
 			}
 		};
