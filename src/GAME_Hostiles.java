@@ -22,7 +22,7 @@ public class GAME_Hostiles {
 	}
 	private void setDefaultValues() {
 
-		spawnpoints = new int[processor.MAX_SCREEN_COL];
+		spawnpoints = new int[HOSTILE_COUNT_PER_BATCH];
 
 		for(int i = 0; i < HOSTILE_BATCH_COUNT; i++) {
 			for(int j = 0; j < HOSTILE_COUNT_PER_BATCH; j++) {
@@ -42,24 +42,25 @@ public class GAME_Hostiles {
 	}
 	void generateHostileBatch(int row) {
 
+		for(int i = 0; i < spawnpoints.length; i++) {
+			spawnpoints[i] = 0;
+		}
+
 		for(int i = 0; i < HOSTILE_COUNT_PER_BATCH; i++) {
 
-			double randAlignment = (Math.random() * 8);
-			int randAlignmentInt = (((int) randAlignment) + 1);
+			int randAlignmentInt;
+			do {
+				double randAlignment = (Math.random() * 8);
+				randAlignmentInt = (((int) randAlignment) + 1);
+			} while(isSpawnUsed(randAlignmentInt));
 
-			if(!isSpawnUsed(randAlignmentInt)) {}
-			else {
-				while(isSpawnUsed(randAlignmentInt)) {
-					randAlignment = (Math.random() * 8);
-					randAlignmentInt = (((int) randAlignment) + 1);
-				}
-			}
 			hostiles[row][i].x = ((randAlignmentInt - 1) * processor.TILE_SIZE);
 			hostiles[row][i].y = -processor.TILE_SIZE;
 
 			for(int j = 0; j < spawnpoints.length; j++) {
 				if(spawnpoints[j] == 0) {
 					spawnpoints[j] = randAlignmentInt;
+					break;
 				}
 			}
 
