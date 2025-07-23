@@ -103,8 +103,8 @@ public class GAME_Processor extends JPanel {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 
-		player.draw(g2);
 		map.draw(g2);
+		player.draw(g2);
 
 		String os = System.getProperty("os.name").toLowerCase();
 		if (os.contains("linux")) {
