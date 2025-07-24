@@ -2,6 +2,7 @@ package src;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 
@@ -44,15 +45,16 @@ public class GAME_Map {
 				obstacles[i].y = processor.PLAY_AREA_HEIGHT;
 				obstacles[i].width = processor.TILE_SIZE;
 				obstacles[i].height = processor.PLAY_AREA_HEIGHT;
-
-		} else {
+			} else {
 				obstacles[i].gif = Toolkit.getDefaultToolkit().createImage("res/obstacle_horizontal.gif");
 				obstacles[i].x = 0;
 				obstacles[i].y = (processor.PLAY_AREA_HEIGHT + (randAnchorInt * processor.TILE_SIZE));
 				obstacles[i].width = processor.SCREEN_WIDTH;
 				obstacles[i].height = processor.TILE_SIZE;
-
 			}
+
+			obstacles[i].hitbox = new Rectangle(obstacles[i].x,
+			obstacles[i].y, obstacles[i].width, obstacles[i].height);
 		}
 	}
 	void draw(Graphics2D g2) { 
