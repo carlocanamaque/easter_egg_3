@@ -15,33 +15,28 @@ public class GAME_Collision {
 		this.map = processor.map;
 		this.hostiles = processor.hostiles;
 	}
-	private boolean checkObstacleCollision() {
+	private void checkObstacleCollision() {
 
 		for(int i = 0; i < map.obstacles.length; i++) {
 			if(player.hitbox.intersects(map.obstacles[i].hitbox)) {
-				return true;
-				System.out.println("Collided with: Obstacle");	// Debug code
+				System.out.println("Collided with: Obstacle");			// Debug code
 			}
 		}
-		return false;
 	}
-	private boolean checkHostileCollision() {
+	private void checkHostileCollision() {
 
 		for(int i = 0; i < hostiles.HOSTILE_BATCH_COUNT; i++) {
 			for(int j = 0; j < hostiles.HOSTILE_COUNT_PER_BATCH; j++) {
-				if(player.hitbox.intersects(hostiles.hostiles[i][j].hitbox)) {
-					return true;
-					System.out.println("Collided with: Hostile");	// Debug code
+				if(hostiles.hostiles[i][j].hitbox != null &&
+				player.hitbox.intersects(hostiles.hostiles[i][j].hitbox)) {
+					System.out.println("Collided with: Hostile");		// Debug code
 				}
 			}
 		}
-		return false;
 	}
 	void update() {
 
-		if(checkObstacleCollision() || checkHostileCollision()) {
-
-			// TO-DO: code here...
-		}
+		checkObstacleCollision();
+		checkHostileCollision();
 	}
 }

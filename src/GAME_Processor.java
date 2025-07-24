@@ -29,6 +29,7 @@ public class GAME_Processor extends JPanel {
 	ENTITY_Player player = new ENTITY_Player(this, input);
 	GAME_Map map = new GAME_Map(this);
 	GAME_Hostiles hostiles = new GAME_Hostiles(this);
+	GAME_Collision collision = new GAME_Collision(this);
 
 	private Runnable mainRunnable;
 	private Runnable obstacleRunnable;
@@ -131,6 +132,7 @@ public class GAME_Processor extends JPanel {
 
 		player.update();
 		hostiles.update();
+		collision.update();
 	}
 	@Override
 	public void paintComponent(Graphics g) {
