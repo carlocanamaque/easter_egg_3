@@ -17,13 +17,24 @@ public class GAME_Collision {
 	}
 	private boolean checkObstacleCollision() {
 
-		// TO-DO: code here...
+		for(int i = 0; i < map.obstacles.length; i++) {
+			if(player.hitbox.intersects(map.obstacles[i].hitbox)) {
+				return true;
+				System.out.println("Collided with: Obstacle");	// Debug code
+			}
+		}
 		return false;
 	}
 	private boolean checkHostileCollision() {
 
-		// TO-DO: code here...
-		// FIRST STEP: start with a nested for-loop to use on hostiles[][].
+		for(int i = 0; i < hostiles.HOSTILE_BATCH_COUNT; i++) {
+			for(int j = 0; j < hostiles.HOSTILE_COUNT_PER_BATCH; j++) {
+				if(player.hitbox.intersects(hostiles.hostiles[i][j].hitbox)) {
+					return true;
+					System.out.println("Collided with: Hostile");	// Debug code
+				}
+			}
+		}
 		return false;
 	}
 	void update() {

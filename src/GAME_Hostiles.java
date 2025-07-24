@@ -8,8 +8,8 @@ import java.awt.Toolkit;
 
 public class GAME_Hostiles {
 
-	private final int HOSTILE_BATCH_COUNT = 10;
-	private final int HOSTILE_COUNT_PER_BATCH = 5;
+	final int HOSTILE_BATCH_COUNT = 10;
+	final int HOSTILE_COUNT_PER_BATCH = 5;
 
 	GAME_Processor processor;
 	ENTITY_Hostile hostiles[][] = new ENTITY_Hostile[HOSTILE_BATCH_COUNT][HOSTILE_COUNT_PER_BATCH];
