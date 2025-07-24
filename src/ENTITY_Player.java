@@ -3,6 +3,7 @@ package src;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 
@@ -35,6 +36,10 @@ public class ENTITY_Player extends PARENT_Entity {
 
 		projectiles = new PARENT_Projectile[PROJECTILE_LIMIT];
 		projectileCount = 0;
+
+		hitX = x;
+		hitY = y;
+		hitbox = new Rectangle(hitX, hitY, processor.TILE_SIZE, processor.TILE_SIZE);
 	}
 	private void useProjectile() {
 
@@ -87,6 +92,9 @@ public class ENTITY_Player extends PARENT_Entity {
 			x = nextX;
 			y = nextY;
 		}
+
+		hitX = x;
+		hitY = y;
 	}
 	void draw(Graphics2D g2) {
 
