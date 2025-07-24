@@ -2,6 +2,7 @@ package src;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 
@@ -89,6 +90,12 @@ public class GAME_Hostiles {
 			}
 
 			hostiles[row][i].isEliminated = false;
+
+			hostiles[row][i].hitX = hostiles[row][i].x;
+			hostiles[row][i].hitY = hostiles[row][i].y;
+
+			hostiles[row][i].hitbox = new Rectangle(hostiles[row][i].hitX,
+			hostiles[row][i].hitY, processor.TILE_SIZE, processor.TILE_SIZE);
 		}
 	}
 	void update() {
@@ -97,6 +104,7 @@ public class GAME_Hostiles {
 			for(int j = 0; j < HOSTILE_COUNT_PER_BATCH; j++) {
 				if(!hostiles[i][j].isEliminated) {
 					hostiles[i][j].y += hostiles[i][j].speed;
+					hostiles[i][j].hitY += hostiles[i][j].speed;
 				}
 			}
 		}
