@@ -5,6 +5,9 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
+// DEBUG IMPORT 
+import java.awt.Color;
+
 
 public class GAME_Map {
 
@@ -62,6 +65,10 @@ public class GAME_Map {
 		for(int i = 0; i < obstacles.length; i++) {
 			g2.drawImage(obstacles[i].gif, obstacles[i].x, obstacles[i].y,
 			obstacles[i].width, obstacles[i].height, processor);
+
+			// DEBUG CODE
+			g2.setColor(Color.GREEN);
+			g2.drawRect(obstacles[i].x, obstacles[i].y, obstacles[i].width, obstacles[i].height);
 		}
 	}
 }

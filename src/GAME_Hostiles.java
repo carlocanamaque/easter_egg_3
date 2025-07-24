@@ -5,6 +5,9 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
+// DEBUG IMPORT 
+import java.awt.Color;
+
 
 public class GAME_Hostiles {
 
@@ -117,6 +120,11 @@ public class GAME_Hostiles {
 					g2.drawImage(hostiles[i][j].gif, hostiles[i][j].x,
 					hostiles[i][j].y, processor.TILE_SIZE,
 					processor.TILE_SIZE, processor);
+
+					// DEBUG CODE
+					g2.setColor(Color.GREEN);
+					g2.drawRect(hostiles[i][j].hitX, hostiles[i][j].hitY,
+					processor.TILE_SIZE, processor.TILE_SIZE);
 				}
 			}
 		}

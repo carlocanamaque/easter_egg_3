@@ -106,8 +106,11 @@ public class ENTITY_Player extends PARENT_Entity {
 			}
 		}
 
+		// DEBUG CODE
 		g2.setColor(Color.WHITE);
 		g2.drawLine(0, processor.PLAY_AREA_HEIGHT, processor.SCREEN_WIDTH, processor.PLAY_AREA_HEIGHT);
+		g2.setColor(Color.GREEN);
+		g2.drawRect(hitX, hitY, processor.TILE_SIZE, processor.TILE_SIZE);
 
 		g2.drawImage(gif, x, y, processor.TILE_SIZE, processor.TILE_SIZE, processor);
 	}
