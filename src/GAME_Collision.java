@@ -23,6 +23,7 @@ public class GAME_Collision {
 	private boolean checkHostileCollision() {
 
 		// TO-DO: code here...
+		// FIRST STEP: start with a nested for-loop to use on hostiles[][].
 		return false;
 	}
 	void update() {
