@@ -84,6 +84,8 @@ public class GAME_Hostiles {
 			int randProjInt = ((int) randProj);
 			if(randProjInt == 0) {
 				hostiles[row][i].hasProjectile = true;
+				hostiles[row][i].projectile.x = hostiles[row][i].x;
+				hostiles[row][i].projectile.y = (hostiles[row][i].y + processor.TILE_SIZE);
 			} else {
 				hostiles[row][i].hasProjectile = false;
 			}
@@ -109,6 +111,12 @@ public class GAME_Hostiles {
 					g2.drawImage(hostiles[i][j].gif, hostiles[i][j].x,
 					hostiles[i][j].y, processor.TILE_SIZE,
 					processor.TILE_SIZE, processor);
+				}
+
+				if(hostiles[i][j].hasProjectile) {
+					g2.drawImage(hostiles[i][j].projectile.gif, hostiles[i][j].projectile.x,
+					hostiles[i][j].projectile.y, processor.TILE_SIZE,
+					((processor.MAX_SCREEN_ROW-1)*processor.TILE_SIZE), processor);
 				}
 			}
 		}
